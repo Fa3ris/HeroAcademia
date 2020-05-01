@@ -13,51 +13,55 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-framework-version>5.2.5.RELEASE</spring-framework-version>
+		<lombok-version>1.18.12</lombok-version>
+		<log4j-version>2.7</log4j-version>
+		<junit-version>3.8.1</junit-version>
 	</properties>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+
+		<!-- SPRING -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>5.2.5.RELEASE</version>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-framework-version}</version>
 		</dependency>
 
-		<!-- Logging implementation -->
-
+		<!-- LOG4J -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>2.7</version>
+			<version>${log4j-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.7</version>
+			<version>${log4j-version}</version>
 		</dependency>
 
-
-		<!-- Logging facade -->
-
+		<!-- SLF4J -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.7</version>
+			<version>${log4j-version}</version>
 		</dependency>
 
+		<!-- Lombok-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.12</version>
+			<version>${lombok-version}</version>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Unit Test -->
+		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>${junit-version}</version>
 			<scope>test</scope>
 		</dependency>
+		
 	</dependencies>
 </project>

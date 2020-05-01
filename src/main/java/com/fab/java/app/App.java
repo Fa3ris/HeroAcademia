@@ -9,11 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fab.java._enum.Element;
-import com.fab.java._generics.Magic;
+import com.fab.java._enum.PersonType;
+import com.fab.java._enum.WeaponType;
+import com.fab.java._factory.PersonFactory;
+import com.fab.java._factory.WeaponFactory;
+import com.fab.java._generic.Magic;
 import com.fab.java._runnable.ManaConsumer;
 import com.fab.java._thread.SimpleThread;
-import com.fab.java.concrete.Civilian;
-import com.fab.java.concrete.Hero;
+import com.fab.java.concrete.person.Civilian;
+import com.fab.java.concrete.person.Hero;
 import com.fab.java.model.ManaPool;
 
 /**
@@ -32,7 +36,8 @@ public class App {
 //		_generic();
 //		_enum();
 //		 _thread();
-		_runnable();
+//		_runnable();
+//		_factory();
 	}
 
 	static private void _interface() {
@@ -99,7 +104,7 @@ public class App {
 
 		alpha.start();
 		beta.start();
-		
+
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -110,14 +115,31 @@ public class App {
 		logger.info("{} au statut {}", beta.getName(), beta.getState());
 
 	}
-	
+
 	static private void _runnable() {
 		ManaPool mp = new ManaPool(50);
-		
+
 		Thread t1 = new Thread(new ManaConsumer(mp, "Zeta"));
 		Thread t2 = new Thread(new ManaConsumer(mp, "Psy"));
-		
+
 		t1.start();
 		t2.start();
+	}
+
+	static private void _factory() {
+		PersonFactory pFactory = PersonFactory.getInstance();
+
+		pFactory.create(PersonType.HERO);
+		pFactory.create(PersonType.CIVILIAN);
+		try {
+			pFactory.create(PersonType.FIGHTER);
+		} catch (IllegalArgumentException e) {
+			logger.info("error creating Person : {}", e.getMessage());
+		}
+
+		WeaponFactory wFactory = WeaponFactory.getInstance();
+
+		wFactory.create(WeaponType.GUN);
+		wFactory.create(WeaponType.SWORD);
 	}
 }

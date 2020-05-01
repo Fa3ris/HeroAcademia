@@ -1,4 +1,4 @@
-package com.fab.java._generics;
+package com.fab.java._generic;
 
 import java.util.List;
 

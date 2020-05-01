@@ -18,8 +18,6 @@ import lombok.Setter;
 @Data
 public abstract class Person {
 
-	// private static final Logger logger = LoggerFactory.getLogger(Person.class);
-
 	@Getter(AccessLevel.NONE)
 	@Setter(AccessLevel.NONE)
 	protected Fight fight = new RegularFight();

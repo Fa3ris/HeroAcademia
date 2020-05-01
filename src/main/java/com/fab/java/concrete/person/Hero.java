@@ -1,4 +1,4 @@
-package com.fab.java.concrete;
+package com.fab.java.concrete.person;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
