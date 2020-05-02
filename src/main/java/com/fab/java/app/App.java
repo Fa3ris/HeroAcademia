@@ -7,6 +7,8 @@ import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fab.java._enum.Element;
 import com.fab.java._enum.PersonType;
@@ -18,6 +20,7 @@ import com.fab.java._runnable.ManaConsumer;
 import com.fab.java._thread.SimpleThread;
 import com.fab.java.concrete.person.Civilian;
 import com.fab.java.concrete.person.Hero;
+import com.fab.java.concrete.weapon.Sword;
 import com.fab.java.model.ManaPool;
 
 /**
@@ -30,7 +33,26 @@ public class App {
 
 	public static void main(String[] args) {
 		logger.info("Hello World!");
+		
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("application-context.xml");
+		
+		
+		for (String s : ctx.getBeanDefinitionNames()) {
+			logger.info("container has bean named : " + s);
+		}
+		
+		Hero h = ctx.getBean("hero", Hero.class);
+		h.punch();
+		h.greet();
+		h.useWeapon();
 
+		Civilian c = ctx.getBean("civilian", Civilian.class);
+		
+		c.useWeapon();
+		
+		c.greet();
+		
+		
 //		_interface();
 //		_stream();
 //		_generic();
@@ -55,7 +77,7 @@ public class App {
 		c.heal();
 		c.resurrect();
 
-		Hero h = new Hero();
+		Hero h = new Hero(new Sword());
 		h.greet();
 		h.eat();
 		h.drink();

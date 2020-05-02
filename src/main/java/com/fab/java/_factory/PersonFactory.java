@@ -8,7 +8,7 @@ import com.fab.java._enum.PersonType;
 import com.fab.java._interface.AbstractFactory;
 import com.fab.java.concrete.person.Civilian;
 import com.fab.java.concrete.person.Hero;
-import com.fab.java.model.ManaPool;
+import com.fab.java.concrete.weapon.Sword;
 
 public class PersonFactory implements AbstractFactory<Person, PersonType> {
 	
@@ -31,7 +31,7 @@ public class PersonFactory implements AbstractFactory<Person, PersonType> {
 			
 		case HERO :
 			logger.info("create Hero");
-			return new Hero();
+			return new Hero(new Sword());
 		default:
 			throw new IllegalArgumentException(type + " not supported");
 		}

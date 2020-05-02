@@ -36,6 +36,8 @@ public abstract class Person {
 	
 	@Setter(AccessLevel.NONE)
 	protected Rank rank = Rank.E;
+	
+	protected Weapon weapon;
 
 	public abstract void greet();
 
@@ -77,6 +79,10 @@ public abstract class Person {
 
 	public void fly() {
 		move.fly();
+	}
+	
+	public void useWeapon() {
+		weapon.use();
 	}
 
 	
