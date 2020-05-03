@@ -12,15 +12,68 @@
 	
 	<bean id="hero" class="com.fab.java.concrete.person.Hero">
 		<constructor-arg index="0" ref="sword" />
+		<property name="messageSource" ref="messageSource"/>
 	</bean>
 	
 	<bean id="hero2" class="com.fab.java.concrete.person.Hero">
 		 <constructor-arg index="0" value="${foo.bar}"/>
+		 <property name="messageSource" ref="messageSource"/>
 	</bean>
 
 	<bean id="civilian" class="com.fab.java.concrete.person.Civilian"></bean>
 
 	<bean id="sword" class="com.fab.java.concrete.weapon.Sword"></bean>
+	
+	
+	<!--
+		Ordre de recherche
+		ex: locale.JAPANESE, message 'hello'
+		
+		#########
+		Exemple 1:
+		
+		resources :
+		
+		a) message_ja_JP
+		b) message_ja {}
+		
+		default Locale ex: if fr_FR
+		c) message_fr_FR
+		d) message_fr {hello = bonjour}
+		
+		then default
+		e) message [hello = BURBUR}
+		
+		find message_ja -> empty -> default to message BURBUR
+		#########
+		
+		#########
+		Exemple 2:
+		
+		resources :
+		
+		default Locale ex: if fr_FR
+		a) message_fr_FR
+		b) message_fr {hello = bonjour}
+		
+		then default
+		c) message [hello = BURBUR}
+		
+		missing message_ja_JP et message_ja -> default Locale -> message bonjour
+		
+		#########
+		
+		
+		 
+	-->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>i18n/message</value>
+            </list>
+        </property>
+    </bean>
+    
 
 	<!--
 		BEANS ARE USED IN ORDER OR DEFINITION

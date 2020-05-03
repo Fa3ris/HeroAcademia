@@ -1,11 +1,14 @@
 package com.fab.java.concrete.person;
 
+import java.util.Locale;
+
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
 
 import com.fab.java._abstract.Person;
@@ -21,6 +24,7 @@ public class Hero extends Person {
 	@Autowired
 	Environment env;
 	
+	private MessageSource messageSource;
 	
 	@Value("${myName}")
 	private String myName;
@@ -28,6 +32,7 @@ public class Hero extends Person {
 	private static final Logger logger = LoggerFactory.getLogger(Hero.class);
 
 	private String lastName;
+	
 	
 	public Hero(Weapon weapon) {
 		super();
@@ -40,6 +45,10 @@ public class Hero extends Person {
 	public Hero(String lastName) {
 		super(); 
 		this.lastName = lastName; 
+	}
+	
+	public void setMessageSource(MessageSource ms) {
+		this.messageSource = ms;
 	}
 
 	/**
@@ -54,6 +63,12 @@ public class Hero extends Person {
 			logger.info("Environment has profile " + p);
 		}
 		logger.info("my name is " + myName);
+		
+		Locale.setDefault(Locale.ITALIAN);
+		
+		logger.info(this.messageSource.getMessage("hello", null, Locale.JAPANESE));
+		logger.info(this.messageSource.getMessage("hello", null, Locale.ENGLISH));
+		logger.info(this.messageSource.getMessage("hello", null, Locale.FRENCH));
 	}
 	
 	@Override
