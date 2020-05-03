@@ -7,8 +7,11 @@ import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.Environment;
 
 import com.fab.java._enum.Element;
 import com.fab.java._enum.PersonType;
@@ -29,6 +32,7 @@ import com.fab.java.model.ManaPool;
  */
 public class App {
 
+	
 	private static final Logger logger = LoggerFactory.getLogger(App.class);
 
 	public static void main(String[] args) {
@@ -52,6 +56,10 @@ public class App {
 		
 		c.greet();
 		
+		Hero h2 = ctx.getBean("hero2", Hero.class);
+		logger.info(h2.getLastName());
+		
+		
 		
 //		_interface();
 //		_stream();
@@ -60,6 +68,8 @@ public class App {
 //		 _thread();
 //		_runnable();
 //		_factory();
+		
+		
 	}
 
 	static private void _interface() {

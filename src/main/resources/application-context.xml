@@ -1,15 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="hero" class="com.fab.java.concrete.person.Hero">  
-		 <constructor-arg index="0" ref="sword"/>
-    </bean>
+	<!-- ANNOTATIONS ENABLED -->
+	<context:annotation-config />
+	
+	<bean id="hero" class="com.fab.java.concrete.person.Hero">
+		<constructor-arg index="0" ref="sword" />
+	</bean>
+	
+	<bean id="hero2" class="com.fab.java.concrete.person.Hero">
+		 <constructor-arg index="0" value="${foo.bar}"/>
+	</bean>
 
 	<bean id="civilian" class="com.fab.java.concrete.person.Civilian"></bean>
-	
+
 	<bean id="sword" class="com.fab.java.concrete.weapon.Sword"></bean>
 
+	<!--
+		BEANS ARE USED IN ORDER OR DEFINITION
+		 	
+		if multiple profiles -> take the first appearing
+		ex set profiles active dev,prod OR prod,dev
+		
+		profile 'prod' defined before profile 'dev' -> use this prod property-placeholder
+	-->
+	
+	<!-- no profile set -->
+	<beans profile="default">    
+      <context:property-placeholder location="classpath:application.properties" />
+	</beans>
+
+	<!--
+		LAST PROPERTY DEFINED WINS
+		 	
+		if foo.bar defined in application.properties and application-prod.properties
+		value defined in prod.properties wins because it is the last 
+	-->
+	<beans profile="prod">    
+      <context:property-placeholder location="classpath:application.properties, classpath:application-prod.properties"/>
+	</beans>
+	
+	<beans profile="test">    
+      <context:property-placeholder location="classpath:application.properties, classpath:application-test.properties"/>
+	</beans>
+	
+	<beans profile="dev">    
+      <context:property-placeholder location="classpath:application.properties, classpath:application-dev.properties"/>
+	</beans>
+	
+	
 </beans>

@@ -1,7 +1,12 @@
 package com.fab.java.concrete.person;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 
 import com.fab.java._abstract.Person;
 import com.fab.java._abstract.Weapon;
@@ -10,10 +15,19 @@ import com.fab.java.implementation.SuperFight;
 
 import lombok.Data;
 
+@Data
 public class Hero extends Person {
+	
+	@Autowired
+	Environment env;
+	
+	
+	@Value("${myName}")
+	private String myName;
 
 	private static final Logger logger = LoggerFactory.getLogger(Hero.class);
 
+	private String lastName;
 	
 	public Hero(Weapon weapon) {
 		super();
@@ -22,7 +36,26 @@ public class Hero extends Person {
 		
 		this.weapon = weapon;
 	}
+	
+	public Hero(String lastName) {
+		super(); 
+		this.lastName = lastName; 
+	}
 
+	/**
+	 * méthode appelée après instantiation du bean
+	 * à partir de JDK 11, doit inclure la dépendance <br>
+	 * <strong>javax.annotation-api</strong>
+	 */
+	@PostConstruct
+	public void init() {
+		logger.info("Hero created");
+		for (String p : this.env.getActiveProfiles()) {
+			logger.info("Environment has profile " + p);
+		}
+		logger.info("my name is " + myName);
+	}
+	
 	@Override
 	public void greet() {
 		logger.info("I am a {} rank hero", this.rank);
