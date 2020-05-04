@@ -1,4 +1,4 @@
-package com.fab.java.simple_java_example;
+package com.fab.heroacademia;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
