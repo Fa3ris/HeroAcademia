@@ -14,6 +14,7 @@ import org.springframework.core.env.Environment;
 import com.fab.heroacademia._abstract.Person;
 import com.fab.heroacademia._abstract.Weapon;
 import com.fab.heroacademia._enum.Rank;
+import com.fab.heroacademia.dao.HeroDao;
 import com.fab.heroacademia.implementation.SuperFight;
 
 import lombok.Data;
@@ -25,6 +26,8 @@ public class Hero extends Person {
 	Environment env;
 	
 	private MessageSource messageSource;
+	
+	private HeroDao heroDao;
 	
 	@Value("${myName}")
 	private String myName;
@@ -50,6 +53,10 @@ public class Hero extends Person {
 	public void setMessageSource(MessageSource ms) {
 		this.messageSource = ms;
 	}
+	
+	public void setHeroDao(HeroDao dao) {
+		this.heroDao = dao;
+	}
 
 	/**
 	 * méthode appelée après instantiation du bean
@@ -69,6 +76,10 @@ public class Hero extends Person {
 		logger.info(this.messageSource.getMessage("hello", null, Locale.JAPANESE));
 		logger.info(this.messageSource.getMessage("hello", null, Locale.ENGLISH));
 		logger.info(this.messageSource.getMessage("hello", null, Locale.FRENCH));
+		
+		Integer count = heroDao.getCount();
+		logger.info("count = {}", count);
+		
 	}
 	
 	@Override

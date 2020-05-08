@@ -7,22 +7,27 @@
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
 
+
+	<import resource="dataSource-context.xml"/>
+	
 	<!-- ANNOTATIONS ENABLED -->
 	<context:annotation-config />
 	
-	<bean id="hero" class="com.fab.java.concrete.person.Hero">
+	<bean id="hero" class="com.fab.heroacademia.concrete.person.Hero">
 		<constructor-arg index="0" ref="sword" />
 		<property name="messageSource" ref="messageSource"/>
+		<property name="heroDao" ref="heroDao"/>
 	</bean>
 	
-	<bean id="hero2" class="com.fab.java.concrete.person.Hero">
+	<bean id="hero2" class="com.fab.heroacademia.concrete.person.Hero">
 		 <constructor-arg index="0" value="${foo.bar}"/>
 		 <property name="messageSource" ref="messageSource"/>
+		 <property name="heroDao" ref="heroDao"/>
 	</bean>
 
-	<bean id="civilian" class="com.fab.java.concrete.person.Civilian"></bean>
+	<bean id="civilian" class="com.fab.heroacademia.concrete.person.Civilian"></bean>
 
-	<bean id="sword" class="com.fab.java.concrete.weapon.Sword"></bean>
+	<bean id="sword" class="com.fab.heroacademia.concrete.weapon.Sword"></bean>
 	
 	
 	<!--

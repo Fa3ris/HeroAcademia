@@ -40,7 +40,6 @@ public class App {
 		
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("application-context.xml");
 		
-		
 		for (String s : ctx.getBeanDefinitionNames()) {
 			logger.info("container has bean named : " + s);
 		}
