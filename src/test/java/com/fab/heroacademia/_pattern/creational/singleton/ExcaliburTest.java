@@ -4,13 +4,13 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class SingletonTest {
+public class ExcaliburTest {
 	
 	@Test
 	public void testIsUnique() {
 		Excalibur e1 = Excalibur.getInstance();
 		Excalibur e2 = Excalibur.getInstance();
-		assertTrue("not same excalibur", e2 == e2);
+		assertTrue("not same excalibur", e1 == e2);
 	}
 
 }
