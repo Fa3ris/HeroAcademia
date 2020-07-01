@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-framework-version>5.2.5.RELEASE</spring-framework-version>
 		<lombok-version>1.18.12</lombok-version>
-		<log4j-version>2.7</log4j-version>
+		<log4j-version>2.13.3</log4j-version>
 		<junit-version>4.13</junit-version>
 	</properties>
 
